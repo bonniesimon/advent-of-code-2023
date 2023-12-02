@@ -3,6 +3,7 @@
 #include <string.h>
 
 char *remove_prefix(char *string);
+int check_valid_balls(char *game_string);
 
 // typedef struct {
 //   char *string;
@@ -27,10 +28,21 @@ int main(int argc, char *argv[]) {
 
   char line[200];
 
+  char *next_game = NULL;
+
   while (fgets(line, sizeof(line), file)) {
     char *actual_input = remove_prefix(line);
+    printf("LINE: %s", line);
 
-    printf("%s", actual_input);
+    char *game = strtok(actual_input, ";");
+    while (NULL != game) {
+      int is_valid_game = check_valid_balls(*game);
+
+      printf("is valid game: %d\n", is_valid_game);
+
+      printf("game: %s\n", game);
+      game = strtok(NULL, ";");
+    }
   }
 
   fclose(file);
@@ -42,3 +54,5 @@ char *remove_prefix(char *string) {
 
   return &colon_position[2];
 }
+
+int check_valid_balls(char *game_string) { return 0; }
