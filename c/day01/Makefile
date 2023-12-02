@@ -14,4 +14,4 @@ all: $(TARGET)
 
 $(TARGET): $(TARGET).c
 	$(CC) $(CFLAGS) -o $(TARGET) $(TARGET).c
-	./${TARGET}
+	./${TARGET} numberset.txt
