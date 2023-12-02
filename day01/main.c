@@ -42,6 +42,8 @@ int main() {
 
   printf("%d\n", sum);
 
+  fclose(file);
+
   return 0;
 }
 
