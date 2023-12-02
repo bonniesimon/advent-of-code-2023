@@ -1,6 +1,9 @@
 /*
 
-PART 1
+This is part 2 solution.
+
+For part 1 solution:
+https://github.com/bonniesimon/advent-of-code-2023/blob/597c5fb54c63fb0c9e262431c333529e4a64746c/c/day01/main.c
 
 */
 
