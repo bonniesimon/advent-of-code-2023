@@ -67,7 +67,7 @@ int main(int argc, char *argv[]) {
     puts("File not passed as argument to executable");
   }
 
-  FILE *file = fopen("input.txt", "r");
+  FILE *file = fopen(argv[1], "r");
 
   if (file == NULL) {
     puts("File cannot be opened");
