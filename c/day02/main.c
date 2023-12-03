@@ -52,7 +52,7 @@ int get_game_number(char *line) {
   line_copy = (char *)malloc(strlen(line) * sizeof(char) + 1);
   strcpy(line_copy, line);
 
-  char *game_text = strtok(line_copy, " ");
+  strtok(line_copy, " ");
   char *game_number_text = strtok(NULL, ":");
 
   int game_number = atoi(game_number_text);
@@ -76,42 +76,41 @@ int main(int argc, char *argv[]) {
 
   char line[200];
 
-  char *next_game = NULL;
-
   int valid_lines[101] = {0};
   int valid_lines_index = 0;
 
   char *line_copy;
   while (fgets(line, sizeof(line), file)) {
     printf("=========================\n%s", line);
+
+    int is_line_valid = 1;
+
     line_copy = (char *)malloc(strlen(line) * sizeof(char));
     strcpy(line_copy, line);
 
     char *actual_input = remove_prefix(line);
 
-    int is_line_valid = 1;
-
-    char *reveal_save_pointer;
-    char *reveal = strtok_r(actual_input, ";", &reveal_save_pointer);
+    char *save_pointer;
+    char *reveal = strtok_r(actual_input, ";", &save_pointer);
     while (NULL != reveal) {
       while (isspace((unsigned char)*reveal)) reveal++;
 
       char balls[30][10];
       int number_of_balls;
-      char *game_string_copy;
+      char *reveal_copy;
 
-      game_string_copy = (char *)malloc(strlen(reveal) * sizeof(char));
-      strcpy(game_string_copy, reveal);
+      reveal_copy = (char *)malloc(strlen(reveal) * sizeof(char));
+      strcpy(reveal_copy, reveal);
 
-      get_balls_in_reveal(game_string_copy, balls, &number_of_balls);
+      get_balls_in_reveal(reveal_copy, balls, &number_of_balls);
 
       if (0 == is_valid_sets_in_game(balls, number_of_balls)) {
         is_line_valid = 0;
         break;
       }
 
-      reveal = strtok_r(NULL, ";", &reveal_save_pointer);
-      free(game_string_copy);
+      reveal = strtok_r(NULL, ";", &save_pointer);
+      free(reveal_copy);
     }
 
     printf("is_valid: %d\n", is_line_valid);
